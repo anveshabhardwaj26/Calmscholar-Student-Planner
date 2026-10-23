@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmScholar - Where Productivity Meets Peace of Mind</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== SIDEBAR: 13 navigation buttons ===== -->
+  <nav class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">✦</div>
+      <div class="logo-copy"><div class="logo-name">CalmScholar<span class="logo-period">.</span></div>
+      <div class="logo-tag">YOUR SPACE TO THRIVE</div></div>
+    </div>
+    <div class="nav-caption">YOUR WORKSPACE</div>
+
+    <button class="nav-button active" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</button>
+    <button class="nav-button" data-page="assignments" onclick="showPage('assignments')">Assignments</button>
+    <button class="nav-button" data-page="exams" onclick="showPage('exams')">Exam Schedule</button>
+    <button class="nav-button" data-page="timetable" onclick="showPage('timetable')">Timetable</button>
+    <button class="nav-button" data-page="attendance" onclick="showPage('attendance')">Attendance</button>
+    <button class="nav-button" data-page="mock" onclick="showPage('mock')">Mock Tests</button>
+    <button class="nav-button" data-page="materials" onclick="showPage('materials')">Study Materials</button>
+    <button class="nav-button" data-page="wellness" onclick="showPage('wellness')">Wellness</button>
+    <button class="nav-button" data-page="groups" onclick="showPage('groups')">Study Groups</button>
+    <button class="nav-button" data-page="goals" onclick="showPage('goals')">Goals and Career</button>
+    <button class="nav-button" data-page="mentors" onclick="showPage('mentors')">Mentor Connect</button>
+    <button class="nav-button" data-page="vent" onclick="showPage('vent')">Anonymous Vent</button>
+    <button class="nav-button" data-page="planner" onclick="showPage('planner')">AI Planner</button>
+    <div class="sidebar-bottom">
+      <div class="sidebar-note-icon">☁</div>
+      <div><strong>Take it one step at a time.</strong><span>Your progress matters.</span></div>
+      <div class="sidebar-sparkle">✧</div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left"><span class="topbar-kicker">YOUR PERSONAL LEARNING SPACE</span><span class="topbar-subtitle">A little progress every day adds up.</span></div>
+      <div class="topbar-right"><span class="today-pill"><span class="live-dot"></span> STUDY MODE</span><div class="profile-chip"><div class="profile-avatar">S</div><div class="profile-text"><strong>Scholar</strong><span>Keep growing</span></div></div></div>
+    </header>
+
+    <!-- ===== 1. DASHBOARD ===== -->
+    <section class="page active" id="page-dashboard">
+      <div class="dashboard-hero">
+        <div class="hero-copy"><span class="eyebrow"><span class="eyebrow-star">✦</span> A FRESH START, EVERY DAY</span>
+          <h1>Welcome back,<br><span class="hero-gradient">Scholar!</span></h1>
+          <p class="subtitle" id="todayText"></p>
+          <div class="hero-microcopy"><span>✧</span> Make space for focus, rest, and growth.</div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-sun"></div><div class="art-book">✧</div><div class="art-star star-a">✦</div><div class="art-star star-b">✧</div><div class="art-dot dot-a"></div><div class="art-dot dot-b"></div><div class="art-caption">GROW AT<br>YOUR PACE</div></div>
+      </div>
+
+      <div class="section-heading"><div><span class="section-overline">YOUR OVERVIEW</span><h2 class="section-title">A quick look at your week</h2></div><span class="section-decoration">✧ ✦ ✧</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-icon icon-lav">▤</div><div class="stat-content"><div class="stat-label">PENDING ASSIGNMENTS</div><div class="stat-number" id="statPending">0</div><span class="stat-footnote">One task at a time</span></div><div class="stat-watermark">▤</div></div>
+        <div class="stat"><div class="stat-icon icon-blue">◷</div><div class="stat-content"><div class="stat-label">UPCOMING EXAMS</div><div class="stat-number" id="statExams">0</div><span class="stat-footnote">You have got this</span></div><div class="stat-watermark">◷</div></div>
+        <div class="stat"><div class="stat-icon icon-mint">◉</div><div class="stat-content"><div class="stat-label">OVERALL ATTENDANCE</div><div class="stat-number" id="statAttendance">--</div><span class="stat-footnote">Consistency is key</span></div><div class="stat-watermark">◉</div></div>
+      </div>
+
+      <div class="card suggestion">
+        <span class="card-kicker">A GENTLE NUDGE</span><h2>Study suggestion</h2>
+        <p id="suggestion"></p>
+      </div>
+
+      <div class="two-columns">
+        <div class="card">
+          <div class="card-heading-row"><div><span class="card-kicker">ON YOUR SCHEDULE</span><h2>Today's classes</h2></div><span class="heading-icon">▦</span></div>
+          <div id="todayClasses"></div>
+        </div>
+        <div class="card">
+          <div class="card-heading-row"><div><span class="card-kicker">COMING UP NEXT</span><h2>Upcoming deadlines</h2></div><span class="heading-icon peach-icon">◷</span></div>
+          <div id="dashDeadlines"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. ASSIGNMENTS ===== -->
+    <section class="page" id="page-assignments">
+      <h1>Assignments</h1>
+      <div class="card">
+        <h2>Add an assignment</h2>
+        <div class="form-row">
+          <div><label for="aTitle">Title</label><input type="text" id="aTitle" placeholder="e.g. Chapter 4 problems"></div>
+          <div><label for="aSubject">Subject</label><input type="text" id="aSubject" placeholder="e.g. Mathematics"></div>
+          <div><label for="aDeadline">Deadline</label><input type="date" id="aDeadline"></div>
+          <div><label for="aPriority">Priority</label>
+            <select id="aPriority"><option>High</option><option selected>Medium</option><option>Low</option></select>
+          </div>
+        </div>
+        <button class="btn" onclick="addAssignment()">Add assignment</button>
+        <p class="message" id="aMessage"></p>
+      </div>
+      <div class="two-columns">
+        <div class="card"><h2>Pending</h2><div id="pendingList"></div></div>
+        <div class="card"><h2>Completed</h2><div id="completedList"></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 3. EXAM SCHEDULE ===== -->
+    <section class="page" id="page-exams">
+      <h1>Exam Schedule</h1>
+      <div class="card">
+        <h2>Add an exam</h2>
+        <div class="form-row">
+          <div><label for="eSubject">Subject</label><input type="text" id="eSubject" placeholder="e.g. Physics"></div>
+          <div><label for="eDate">Date</label><input type="date" id="eDate"></div>
+          <div><label for="eTime">Time</label><input type="time" id="eTime"></div>
+        </div>
+        <button class="btn" onclick="addExam()">Add exam</button>
+        <p class="message" id="eMessage"></p>
+      </div>
+      <div class="card"><h2>Your exams</h2><div id="examList"></div></div>
+    </section>
+
+    <!-- ===== 4. TIMETABLE ===== -->
+    <section class="page" id="page-timetable">
+      <h1>Timetable</h1>
+      <div class="card">
+        <h2>Add a class</h2>
+        <div class="form-row">
+          <div><label for="tSubject">Subject</label><input type="text" id="tSubject" placeholder="e.g. Computer Science"></div>
+          <div><label for="tDay">Day</label>
+            <select id="tDay">
+              <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+              <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+            </select>
+          </div>
+          <div><label for="tStart">Start time</label><input type="time" id="tStart"></div>
+          <div><label for="tEnd">End time</label><input type="time" id="tEnd"></div>
+        </div>
+        <button class="btn" onclick="addClass()">Add class</button>
+        <p class="message" id="tMessage"></p>
+      </div>
+      <div class="week" id="weekGrid"></div>
+    </section>
+
+    <!-- ===== 5. ATTENDANCE ===== -->
+    <section class="page" id="page-attendance">
+      <h1>Attendance</h1>
+      <div class="card">
+        <h2>Add a subject</h2>
+        <div class="form-row">
+          <div><label for="sName">Subject</label><input type="text" id="sName" placeholder="e.g. Mathematics"></div>
+          <div><label for="sAttended">Classes attended</label><input type="number" id="sAttended" min="0" placeholder="e.g. 30"></div>
+          <div><label for="sTotal">Total classes conducted</label><input type="number" id="sTotal" min="0" placeholder="e.g. 38"></div>
+        </div>
+        <button class="btn" onclick="addSubject()">Add subject</button>
+        <p class="message" id="sMessage"></p>
+      </div>
+      <div class="card">
+        <h2>Minimum attendance required</h2>
+        <div class="form-row">
+          <div><label for="threshold">Percentage (default 75)</label><input type="number" id="threshold" min="1" max="99" onchange="changeThreshold()"></div>
+        </div>
+        <p class="note">Attendance % = (classes attended / total classes) x 100</p>
+      </div>
+      <div class="card"><h2>Your subjects</h2><div id="attendanceList"></div></div>
+    </section>
+
+    <!-- ===== 6. MOCK TESTS ===== -->
+    <section class="page" id="page-mock">
+      <h1>Mock Tests</h1>
+      <p class="subtitle">Answer all five questions, then press Submit.</p>
+      <div id="quizArea"></div>
+      <button class="btn" onclick="submitQuiz()">Submit test</button>
+      <button class="btn btn-light" onclick="resetQuiz()">Try again</button>
+      <p class="message" id="quizMessage"></p>
+      <div class="card hidden" id="quizResult"></div>
+    </section>
+
+    <!-- ===== 7. STUDY MATERIALS ===== -->
+    <section class="page" id="page-materials">
+      <h1>Study Materials</h1>
+      <p class="note">This page saves <strong>links</strong> to resources on the internet. It does not upload or store files.</p>
+      <div class="card">
+        <h2>Save a resource link</h2>
+        <div class="form-row">
+          <div><label for="mTitle">Title</label><input type="text" id="mTitle" placeholder="e.g. Calculus video lectures"></div>
+          <div><label for="mSubject">Subject</label>
+            <select id="mSubject">
+              <option>Mathematics</option><option>Physics</option><option>Chemistry</option>
+              <option>Computer Science</option><option>English</option><option>Other</option>
+            </select>
+          </div>
+          <div><label for="mUrl">Resource URL</label><input type="text" id="mUrl" placeholder="https://..."></div>
+        </div>
+        <button class="btn" onclick="addMaterial()">Save link</button>
+        <p class="message" id="mMessage"></p>
+      </div>
+      <div class="card"><h2>Saved links</h2><div id="materialList"></div></div>
+    </section>
+
+    <!-- ===== 8. WELLNESS ===== -->
+    <section class="page" id="page-wellness">
+      <h1>Wellness</h1>
+      <div class="two-columns">
+        <div class="card">
+          <h2>How are you feeling today?</h2>
+          <div class="moods" id="moodButtons"></div>
+          <h2>Stress level: <span id="stressValue">5</span> / 10</h2>
+          <input type="range" id="stressSlider" min="1" max="10" value="5" oninput="updateStressLabel()">
+          <div class="slider-labels"><span>Calm</span><span>Overwhelmed</span></div>
+          <button class="btn" onclick="saveWellness()">Save check-in</button>
+          <p class="message" id="wMessage"></p>
+        </div>
+        <div class="card">
+          <h2>Your wellness message</h2>
+          <div id="wellnessAdvice"><p class="note">Save a check-in to see suggestions.</p></div>
+        </div>
+      </div>
+      <p class="note">This is a simple self check-in, not a medical test. If you feel low or overwhelmed for many days, please talk to a counsellor, a teacher or someone you trust.</p>
+    </section>
+
+    <!-- ===== 9. STUDY GROUPS ===== -->
+    <section class="page" id="page-groups">
+      <h1>Study Groups</h1>
+      <p class="note">Demonstration only: these are sample groups. Joining just saves your choice in this browser. There is no chat and no real members.</p>
+      <div class="cards-grid" id="groupList"></div>
+    </section>
+
+    <!-- ===== 10. GOALS AND CAREER ===== -->
+    <section class="page" id="page-goals">
+      <h1>Goals and Career</h1>
+      <div class="card">
+        <h2>Add a goal</h2>
+        <div class="form-row">
+          <div><label for="gTitle">Goal</label><input type="text" id="gTitle" placeholder="e.g. Score 85% in finals"></div>
+          <div><label for="gCategory">Category</label>
+            <select id="gCategory"><option>Academic</option><option>Career</option><option>Health</option><option>Personal</option></select>
+          </div>
+          <div><label for="gDate">Target date</label><input type="date" id="gDate"></div>
+        </div>
+        <button class="btn" onclick="addGoal()">Add goal</button>
+        <p class="message" id="gMessage"></p>
+      </div>
+      <div class="card"><h2>Your goals</h2><div id="goalList"></div></div>
+      <div class="card">
+        <h2>Career resources</h2>
+        <ul class="link-list">
+          <li><a href="https://www.coursera.org" target="_blank" rel="noopener noreferrer">Coursera</a> - online courses from universities</li>
+          <li><a href="https://nptel.ac.in" target="_blank" rel="noopener noreferrer">NPTEL</a> - free engineering and science courses</li>
+          <li><a href="https://www.freecodecamp.org" target="_blank" rel="noopener noreferrer">freeCodeCamp</a> - learn to code for free</li>
+          <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a> - HTML, CSS and JavaScript reference</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 11. MENTOR CONNECT ===== -->
+    <section class="page" id="page-mentors">
+      <h1>Mentor Connect</h1>
+      <p class="note">These mentor cards are <strong>demonstration data</strong>. The people are made up and cannot be contacted.</p>
+      <div class="cards-grid" id="mentorList"></div>
+    </section>
+
+    <!-- ===== 12. ANONYMOUS VENT ===== -->
+    <section class="page" id="page-vent">
+      <h1>Anonymous Vent</h1>
+      <p class="note">Messages are saved only in <strong>this browser</strong> (localStorage). Nobody else can see them, and they are not sent to any server. This is a private notepad, not a community, and it does not guarantee anonymity.</p>
+      <div class="card">
+        <h2>What is on your mind?</h2>
+        <textarea id="ventText" rows="4" maxlength="500" placeholder="Write anything you want to let out..."></textarea>
+        <button class="btn" onclick="postVent()">Submit</button>
+        <p class="message" id="vMessage"></p>
+      </div>
+      <div class="card">
+        <h2>Your messages</h2>
+        <div id="ventList"></div>
+        <button class="btn btn-light" onclick="clearVent()">Clear all messages</button>
+      </div>
+    </section>
+
+    <!-- ===== 13. AI PLANNER ===== -->
+    <section class="page" id="page-planner">
+      <h1>AI Planner</h1>
+      <p class="note">This is a <strong>rule-based smart study planner</strong>. It follows simple rules written in JavaScript. It does not use a real AI model or the internet.</p>
+      <div class="card">
+        <h2>Tell the planner about your week</h2>
+
+        <label for="pSubjects">1. Subjects to study (separate with commas)</label>
+        <input type="text" id="pSubjects" placeholder="Maths, Physics, Computer Science">
+
+        <label for="pExams">2. Upcoming exam dates (Subject:YYYY-MM-DD, separated by commas)</label>
+        <input type="text" id="pExams" placeholder="Maths:2026-11-10, Physics:2026-11-14">
+        <button class="btn btn-light btn-small" onclick="fillExams()">Use my saved exams</button>
+
+        <label for="pWeak">3. Topics that need more attention (separate with commas)</label>
+        <input type="text" id="pWeak" placeholder="Maths, Integration">
+
+        <div class="form-row">
+          <div><label for="pHours">4. Study hours per day</label><input type="number" id="pHours" min="1" max="16" step="0.5" value="4"></div>
+          <div><label for="pStart">Start time</label><input type="time" id="pStart" value="16:00"></div>
+        </div>
+
+        <label for="pAssign">5. Pending assignments (Title:YYYY-MM-DD, separated by commas)</label>
+        <input type="text" id="pAssign" placeholder="Lab report:2026-11-05">
+        <button class="btn btn-light btn-small" onclick="fillAssignments()">Use my saved assignments</button>
+
+        <div class="spacer"></div>
+        <button class="btn" onclick="generatePlan()">Generate Study Plan</button>
+        <p class="message" id="pMessage"></p>
+      </div>
+      <div class="card hidden" id="planResult"></div>
+    </section>
+
+    <footer class="app-footer"><span>✦ CalmScholar</span><span>Designed for a healthier study rhythm <b>·</b> Made with care</span></footer>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
